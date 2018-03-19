@@ -6,8 +6,10 @@ public class Node
 	private int xCoord;
 	private int yCoord;
 	private ArrayList<String> links = new ArrayList<String>();
+	private double distFromStart = 1000000000000000.0;
+	private boolean wasVisited = false;
 	
-	public void Node(String nodeName, int x, int y, ArrayList nextCoords)
+	Node(String nodeName, int x, int y, ArrayList nextCoords)
 	{
 		name = nodeName;
 		xCoord = x;

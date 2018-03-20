@@ -7,11 +7,50 @@ public class Map
 	{
 		if(mapNo == 1)
 		{
-			//Create first map
-		}
-		else if(mapNo == 2)
-		{
-			//Create map 2
+			ArrayList<String> neighbors = new ArrayList<String>();
+			neighbors.add("B");
+			neighbors.add("G");
+			neighbors.add("F");
+			route.add(new Node("A",0,0,neighbors));
+			
+			neighbors = new ArrayList<String>();
+			neighbors.add("A");
+			neighbors.add("C");
+			neighbors.add("G");
+			route.add(new Node("B",16,12,neighbors));
+			
+			neighbors = new ArrayList<String>();
+			neighbors.add("B");
+			neighbors.add("D");
+			neighbors.add("G");
+			route.add(new Node("C",4,2,neighbors));
+			
+			neighbors = new ArrayList<String>();
+			neighbors.add("D");
+			neighbors.add("G");
+			neighbors.add("F");
+			route.add(new Node("E",11,21,neighbors));
+			
+			neighbors = new ArrayList<String>();
+			neighbors.add("E");
+			neighbors.add("A");
+			neighbors.add("G");
+			route.add(new Node("F",43,26,neighbors));
+			
+			neighbors = new ArrayList<String>();
+			neighbors.add("A");
+			neighbors.add("B");
+			neighbors.add("C");
+			neighbors.add("D");
+			neighbors.add("E");
+			neighbors.add("F");
+			route.add(new Node("G",3,4,neighbors));
+			
+			neighbors = new ArrayList<String>();
+			neighbors.add("E");
+			neighbors.add("C");
+			neighbors.add("G");
+			route.add(new Node("D",6,8,neighbors));
 		}
 	}
 	
@@ -41,22 +80,6 @@ public class Map
 	{
 		int last = route.size()-1;
 		return route.get(last);
-	}
-	
-	public double makeDijkstra()
-	{
-		ArrayList<String> shortestPath = new ArrayList<String>();
-		ArrayList<String> visitedNodes = new ArrayList<String>();
-		ArrayList<Double> distToNode = new ArrayList<Double>();
-		Node currentNode = route.get(0);
-		
-		while(currentNode != route.get(route.size()-1))
-		{
-			for(String adjacent: currentNode.getLinks())
-			{
-				
-			}
-		}
 	}
 	
 	public double getDist(Node start, Node finish)

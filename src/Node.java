@@ -7,14 +7,14 @@ public class Node
 	private int yCoord;
 	private ArrayList<String> links = new ArrayList<String>();
 	private double distFromStart = 1000000000000000.0;
-	private boolean wasVisited = false;
+	private boolean isBoxed = false;
 	
-	Node(String nodeName, int x, int y, ArrayList nextCoords)
+	Node(String nodeName, int x, int y, ArrayList nextNodes)
 	{
 		name = nodeName;
 		xCoord = x;
 		yCoord = y;
-		links = nextCoords;
+		links = nextNodes;
 	}
 	
 	public String getName()
@@ -34,5 +34,25 @@ public class Node
 	public ArrayList<String> getLinks()
 	{
 		return links;
+	}
+	
+	public boolean isBoxed()
+	{
+		return isBoxed;
+	}
+	
+	public void setBoxTrue()
+	{
+		isBoxed = true;
+	}
+	
+	public void setDist(double dist)
+	{
+		distFromStart = dist;
+	}
+	
+	public double getDistFromStart()
+	{
+		return distFromStart;
 	}
 }

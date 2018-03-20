@@ -1,32 +1,58 @@
 import java.util.ArrayList;
 
 public class DijkstraCalc 
-{
-	private Map leftHand = new Map(1);
-	private Map rightHand = new Map(2);
-	private Map leftFoot = new Map(3);
-	private Map rightFoot = new Map(4);
-	
-	public ArrayList makeDijkstra(Map mapName)
+{	
+	public static Double makeDijkstra(Map mapName)
 	{
 		ArrayList<String> shortestPath = new ArrayList<String>();
-		ArrayList<String> visitedNodes = new ArrayList<String>();
-		ArrayList<Double> distToNode = new ArrayList<Double>();
 		
-		for(Node currentNode: mapName.getRoute())
+		mapName.getStart().setDist(0);
+		mapName.getStart().setBoxTrue();
+		
+		Node latestNode = mapName.getStart();
+		
+		while(mapName.getEnd().isBoxed() == false ) 
 		{
-			for(String adjacent: currentNode.getLinks())
+			//This block calculates new distances for the neighboring nodes to the latestNode
+			//if the new distance is shorter, the new distance replaces the old one
+			for(String neighborNode: latestNode.getLinks())
 			{
-				
+				if(mapName.getHold(neighborNode).isBoxed() == false)
+				{
+					double testDist = latestNode.getDistFromStart() + mapName.getDist(latestNode, mapName.getHold(neighborNode));
+					
+					if(testDist < mapName.getHold(neighborNode).getDistFromStart())
+					{
+						mapName.getHold(neighborNode).setDist(testDist);
+					}
+				}
 			}
+			
+			//this block indexes through the route and chooses the unboxed node with the shortest distance from the start
+			double shortestDist = 1000000000000000.1; 
+			
+			for(Node nextNode: mapName.getRoute())
+			{
+				if(nextNode.isBoxed() == false)
+				{
+					if(nextNode.getDistFromStart() < shortestDist)
+					{
+						latestNode = nextNode;
+						shortestDist= latestNode.getDistFromStart();
+					}
+				}
+			}
+			System.out.println(latestNode.getName());
+			latestNode.setBoxTrue();
 		}
+		
+		return mapName.getEnd().getDistFromStart();
+		
 	}
 	
-	public double getDist(Node start, Node finish)
+	public static void main(String[] args)
 	{
-		double dist = Math.sqrt(Math.pow(start.getXCoord() - finish.getXCoord(), 2) + Math.pow(start.getYCoord() - finish.getYCoord(), 2));
-		return dist;
+		Map test = new Map(1);
+		System.out.println(makeDijkstra(test));
 	}
-	
-	//put main here and generate the paths
 }

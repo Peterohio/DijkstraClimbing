@@ -54,5 +54,9 @@ public class DijkstraCalc
 	{
 		Map test = new Map(1);
 		System.out.println(makeDijkstra(test));
+		for(Node check: test.getRoute())
+		{
+			System.out.println(check.getName() + " - " + check.getDistFromStart());
+		}
 	}
 }
